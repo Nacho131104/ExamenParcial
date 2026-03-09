@@ -16,13 +16,29 @@
 .cocktail-card{
   width: 100%;
   max-width: 800px;
+  background: #f6f7f8;
+  border-radius: 10px;
+  padding: 16px;
+}
+.home-card{
+  display: flex;
+  width: 100%;
+  max-width: 800px;
   background: #fff;
   border-radius: 10px;
   padding: 16px;
+  flex-direction: column;
+  gap: 10px
 }
 
 .title{
   margin-bottom: 12px;
+}
+
+.page-title {
+  display: flex;
+  justify-content: center;
+
 }
 
 .search-box,
@@ -44,12 +60,20 @@
   color: #080808;
 }
 
+.button-aleatorio {
+  padding: 10px;
+  border: none;
+  border-radius: 8px;
+  color: #696868;
+}
+
 .cocktail-item{
   display: flex;
   flex-direction: column;
   gap: 10px;
   border-radius: 8px;
   padding: 10px;
+  background: #89bdf1;
 }
 
 .cocktail-image{

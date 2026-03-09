@@ -34,9 +34,9 @@ const Home=()=>{
 
   return (
     <div className="page">
-      <div className="card">
+      <div className="home-card">
      
-        <h1 className="title">Cocktails</h1>
+        <h1 className="page-title">Cocktails</h1>
         
         <div className="search-box">
           <input
@@ -50,7 +50,7 @@ const Home=()=>{
           <button className="button" onClick={handleSearch}>Buscar</button>
         </div>
 
-        <button className="button" onClick={handleRandom}> Dime algo bonito</button>
+        <button className="button-aleatorio" onClick={handleRandom}>{loading ? "loading": "Dime algo bonito"}</button>
         {error && <p>{error}</p>}
       </div>
     </div>
