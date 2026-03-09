@@ -1,49 +1,37 @@
 'use client';
-
 import { useRouter } from 'next/navigation';
 import { useState } from 'react';
-//import { getRandomCocktail } from '@/lib/api/cocktail';
+import { getRandom } from '@/lib/api/cocktails';
 import "./page.css"
 
 
 const Home=()=>{
   const router=useRouter();  
 
-  const [search, setSearch] = useState("");
+  const [name, setName] = useState("");
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState<string | null>(null);
 
   const handleSearch = () => {
-    const cleanName = search.trim();
+    const nameFinal = name.trim();
 
-    if (!cleanName) return;
+    if (!nameFinal) return;
 
-    router.push(`/cocktail?name=${encodeURIComponent(cleanName)}`);
+    router.push(`/cocktail?name=${encodeURIComponent(nameFinal)}`);
   };
 
-  /*
-  const handleRandomCocktail = async () => {
-    if (loading) return;
-
-    setError(null);
-    setLoading(true);
-
+  const handleRandom = async() =>{
     try {
-      const randomCocktail = await getRandomCocktail();
 
-      if (!randomCocktail) {
-        setError('No se pudo obtener un cocktail aleatorio.');
-        return;
-      }
+      const randomCocktail = await getRandom()
+      if(!randomCocktail) setError("No se pudo generar un cocktail aleatorio")
 
-      router.push(`/cocktail/${randomCocktail.idDrink}`);
-    } catch {
-      setError('Ocurrio un error al buscar un cocktail aleatorio.');
-    } finally {
-      setLoading(false);
+      router.push(`/cocktail/${randomCocktail?.idDrink}`)
+    }catch(e){
+      setError(String(e))
     }
-  };
-  */
+  }
+
   return (
     <div className="page">
       <div className="card">
@@ -54,13 +42,15 @@ const Home=()=>{
           <input
             type="text"
             placeholder="Buscar"
-            value={search}
-            onChange={(e)=>setSearch(e.target.value)}
+            value={name}
+            onChange={(e)=>setName(e.target.value)}
             className="input"
           />
           
           <button className="button" onClick={handleSearch}>Buscar</button>
         </div>
+
+        <button className="button" onClick={handleRandom}> Dime algo bonito</button>
         {error && <p>{error}</p>}
       </div>
     </div>

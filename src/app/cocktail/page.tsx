@@ -16,19 +16,18 @@ const CocktailPage = () => {
     const [results, setResults] = useState<Cocktail[]>([]);
 
     useEffect(() => {
-        const cleanName = name.trim();
+        const finalName = name.trim();
 
-        if (!cleanName) {
+        if (!finalName) {
             setResults([]);
             return;
         }
 
         setLoading(true);
 
-        getCocktailByName(cleanName)
-            .then((data) => setResults(data))
-            .catch(() => setResults([]))
-            .finally(() => setLoading(false));
+        getCocktailByName(finalName).then((data) => setResults(data))
+        .catch(() => setResults([]))
+        .finally(() => setLoading(false));
     }, [name]);
 
     return (
